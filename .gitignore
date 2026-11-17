@@ -1,0 +1,18 @@
+# Secrets
+.env
+
+# Data (regenerable, can be large)
+data/raw/*
+data/processed/*
+*.db
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+.vscode/
