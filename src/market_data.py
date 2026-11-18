@@ -1,6 +1,7 @@
 """Market data collection for AurumAI."""
 import logging
 import warnings
+import config
 
 import pandas as pd
 import yfinance as yf
@@ -102,3 +103,12 @@ def validate(df: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame(columns=["timestamp", "symbol", "issue"])
 
     return pd.concat(flagged, ignore_index=True).sort_values("timestamp")
+
+def load_symbol(symbol: str, interval: str = "1d") -> pd.DataFrame:
+    """Load one symbol from the processed market file, indexed by timestamp."""
+    path = config.PROCESSED_DIR / f"market_{interval}.parquet"
+    market = pd.read_parquet(path)
+    df = market[market["symbol"] == symbol].set_index("timestamp").sort_index()
+    if df.empty:
+        raise MarketDataError(f"No rows for symbol '{symbol}' in {path.name}")
+    return df[["open", "high", "low", "close", "volume"]]
