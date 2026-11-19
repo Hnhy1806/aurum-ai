@@ -63,3 +63,7 @@ MACRO_START_DATE = MARKET_START_DATE
 
 # Warn if a series' latest observation is older than this (FRED stopped updating, etc.)
 MACRO_MAX_AGE_DAYS = {"daily": 10, "monthly": 100}
+
+# When a daily market bar is final
+MARKET_CLOSE_TIME_ET = "17:00"     # CME and ICE daily sessions end at 5 PM ET
+MARKET_24_7_SYMBOLS = {"bitcoin"}  # daily bar dated D closes at 00:00 UTC on D+1
